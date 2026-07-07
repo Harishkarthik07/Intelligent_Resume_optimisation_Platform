@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeIQ Admin Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --ink: #0a0a0f;
+            --ink2: #1c1c28;
+            --muted: #6b6b80;
+            --muted2: #9898aa;
+            --white: #ffffff;
+            --off: #f7f7fb;
+            --accent: #5b4cff;
+            --accent2: #7c6dff;
+            --accent-lt: #eeecff;
+            --green: #12b96a;
+            --amber: #f5a623;
+            --red: #f53e3e;
+            --border: #e8e8f0;
+            --border2: #d0d0e0;
+            --shadow: 0 2px 16px rgba(0,0,0,0.08);
+            --shadow2: 0 8px 40px rgba(0,0,0,0.12);
+        }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--off);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        .admin-container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
+        }
+        /* Sidebar */
+        .admin-sidebar {
+            background: var(--ink2);
+            color: var(--white);
+            padding: 24px 16px;
+            position: fixed;
+            height: 100vh;
+            width: 240px;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+        .admin-logo {
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .admin-logo svg {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 6px;
+            padding: 4px;
+        }
+        .admin-menu {
+            list-style: none;
+        }
+        .admin-menu li {
+            margin-bottom: 8px;
+        }
+        .admin-menu a {
+            display: block;
+            padding: 12px 14px;
+            border-radius: 8px;
+            color: var(--muted2);
+            transition: all 0.2s;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .admin-menu a:hover, .admin-menu a.active {
+            background: var(--accent);
+            color: var(--white);
+        }
+        /* Main content */
+        .admin-main {
+            margin-left: 240px;
+            padding: 32px;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .admin-header h1 {
+            font-size: 24px;
+            color: var(--ink);
+        }
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        .admin-logout {
+            padding: 8px 16px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .metric-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent);
+        }
+        .metric-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .metric-sub {
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .metric-change {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 8px;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .metric-change.negative {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        /* Chart Container */
+        .chart-container {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+        }
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .data-table thead {
+            background: var(--off);
+            border-bottom: 1px solid var(--border);
+        }
+        .data-table th {
+            padding: 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+        }
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        .data-table tbody tr:hover {
+            background: var(--off);
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status-inactive {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        /* Refresh Button */
+        .refresh-btn {
+            padding: 8px 14px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .refresh-btn:hover {
+            background: var(--accent2);
+        }
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+        }
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .last-updated {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: right;
+            margin-top: 12px;
+        }
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+            .admin-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                padding: 16px;
+            }
+            .admin-main {
+                margin-left: 0;
+                padding: 16px;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>
+                ResumeIQ Admin
+            </div>
+            <ul class="admin-menu">
+                <li><a href="#" onclick="switchDash('overview')" class="active" data-section="overview">📊 Overview</a></li>
+                <li><a href="#" onclick="switchDash('users')" data-section="users">👥 Users</a></li>
+                <li><a href="#" onclick="switchDash('analyses')" data-section="analyses">📈 Analyses</a></li>
+                <li><a href="#" onclick="switchDash('growth')" data-section="growth">📊 Growth</a></li>
+                <li><a href="#" onclick="switchDash('revenue')" data-section="revenue">💰 Revenue</a></li>
+                <li style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                    <a href="#" onclick="logout()">🚪 Logout</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <div class="admin-user">
+                    <div style="text-align: right;">
+                        <div style="font-size: 13px; color: var(--muted);">Admin</div>
+                        <div style="font-size: 14px; font-weight: 600;">You</div>
+                    </div>
+                    <div class="admin-avatar">A</div>
+                    <button class="admin-logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <!-- Overview Tab -->
+            <div id="section-overview" class="section active">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Real-Time Metrics</h2>
+                    <button class="refresh-btn" onclick="loadRealTimeStats()">🔄 Refresh</button>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Total Users</div>
+                        <div class="metric-value" id="total-users">—</div>
+                        <div class="metric-sub">All time</div>
+                    </div>
+                    <div class="metric-card" style="border-left-color: var(--green);">
+                        <div class="metric-label">Active Users (24h)</div>
+                        <div class="metric-value" id="active-users">—</div>
+                        <div class="metric-sub">Last 24 hours</div>
+                    </div>
+                    <div class="metric-card" style="border-left-color: var(--amber);">
+                        <div class="metric-label">Analyses Run (24h)</div>
+                        <div class="metric-value" id="analyses-24h">—</div>
+                        <div class="metric-sub">Last 24 hours</div>
+                    </div>
+                    <div class="metric-card" style="border-left-color: #5b4cff;">
+                        <div class="metric-label">Avg ATS Score</div>
+                        <div class="metric-value" id="avg-ats">—</div>
+                        <div class="metric-sub">/100</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="metric-card">
+                        <div class="metric-label">Subscription Breakdown</div>
+                        <div style="padding: 16px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                <span>Free Plan</span>
+                                <span id="free-users" style="font-weight: 600;">—</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                <span>Pro Plan</span>
+                                <span id="pro-users" style="font-weight: 600; color: var(--green);">—</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Enterprise</span>
+                                <span id="enterprise-users" style="font-weight: 600; color: var(--accent);">—</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Resumes & Usage</div>
+                        <div style="padding: 16px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                                <span>Total Resumes</span>
+                                <span id="total-resumes" style="font-weight: 600;">—</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Avg Score</span>
+                                <span id="avg-score" style="font-weight: 600;">—</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="section-users" class="section" style="display: none;">
+                <h2 style="margin-bottom: 20px;">User Analytics</h2>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">New Users (7d)</div>
+                        <div class="metric-value" id="new-users-7d">—</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Most Active Users</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Analyses Run</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="active-users-table">
+                            <tr>
+                                <td colspan="4" class="loading">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Analyses Tab -->
+            <div id="section-analyses" class="section" style="display: none;">
+                <h2 style="margin-bottom: 20px;">Analysis Metrics</h2>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Excellent (80+)</div>
+                        <div class="metric-value" id="score-excellent">—</div>
+                    </div>
+                    <div class="metric-card" style="border-left-color: var(--green);">
+                        <div class="metric-label">Good (60-79)</div>
+                        <div class="metric-value" id="score-good">—</div>
+                    </div>
+                    <div class="metric-card" style="border-left-color: var(--amber);">
+                        <div class="metric-label">Fair (40-59)</div>
+                        <div class="metric-value" id="score-fair">—</div>
+                    </div>
+                    <div class="metric-card" style="border-left-color: var(--red);">
+                        <div class="metric-label">Needs Work (<40)</div>
+                        <div class="metric-value" id="score-poor">—</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="chart-container">
+                        <h3 class="chart-title">Top Matched Skills</h3>
+                        <table class="data-table" style="font-size: 13px;">
+                            <thead>
+                                <tr><th>Skill</th><th>Count</th></tr>
+                            </thead>
+                            <tbody id="matched-skills-table">
+                                <tr><td colspan="2" class="loading">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">Top Missing Skills</h3>
+                        <table class="data-table" style="font-size: 13px;">
+                            <thead>
+                                <tr><th>Skill</th><th>Count</th></tr>
+                            </thead>
+                            <tbody id="missing-skills-table">
+                                <tr><td colspan="2" class="loading">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Growth Tab -->
+            <div id="section-growth" class="section" style="display: none;">
+                <h2 style="margin-bottom: 20px;">Growth Analytics</h2>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Analyses (30d)</div>
+                        <div class="metric-value" id="analyses-30d">—</div>
+                    </div>
+                    <div class="metric-card" style="border-left-color: var(--green);">
+                        <div class="metric-label">Current Week</div>
+                        <div class="metric-value" id="analyses-current-week">—</div>
+                        <div id="growth-indicator" style="margin-top: 8px;"></div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Daily Activity (Last 30 Days)</h3>
+                    <div id="growth-chart" style="height: 200px; display: flex; align-items: flex-end; gap: 4px; padding: 20px 0;">
+                        <div class="loading">Loading chart...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Tab -->
+            <div id="section-revenue" class="section" style="display: none;">
+                <h2 style="margin-bottom: 20px;">Revenue Metrics</h2>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Monthly Recurring Revenue</div>
+                        <div class="metric-value" id="mrr">—</div>
+                    </div>
+                    <div class="metric-card" style="border-left-color: var(--green);">
+                        <div class="metric-label">Average Revenue Per User</div>
+                        <div class="metric-value" id="arpu">—</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Subscription Distribution</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; font-weight: 700; color: var(--accent); margin-bottom: 8px;" id="sub-free">—</div>
+                            <div style="font-size: 13px; color: var(--muted);">Free Plan</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; font-weight: 700; color: var(--green); margin-bottom: 8px;" id="sub-pro">—</div>
+                            <div style="font-size: 13px; color: var(--muted);">Pro ($29/mo)</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; font-weight: 700; color: var(--accent2); margin-bottom: 8px;" id="sub-enterprise">—</div>
+                            <div style="font-size: 13px; color: var(--muted);">Enterprise ($199/mo)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="last-updated" id="last-updated">Last updated: Never</div>
+        </main>
+    </div>
+
+    <script>
+        const API = 'http://localhost:8000';
+        let adminToken = localStorage.getItem('riq_tok');
+
+        if (!adminToken) {
+            alert('Please log in as admin first');
+            window.location.href = '/';
+        }
+
+        async function apiCall(endpoint) {
+            try {
+                const res = await fetch(`${API}/api/v1/admin${endpoint}`, {
+                    headers: { 'Authorization': `Bearer ${adminToken}` }
+                });
+                if (!res.ok) throw new Error('Unauthorized');
+                return await res.json();
+            } catch (e) {
+                console.error('API Error:', e);
+                return null;
+            }
+        }
+
+        async function loadRealTimeStats() {
+            const data = await apiCall('/dashboard/realtime');
+            if (!data) return;
+
+            document.getElementById('total-users').textContent = data.users.total;
+            document.getElementById('active-users').textContent = data.users.active_24h;
+            document.getElementById('analyses-24h').textContent = data.usage.analyses_24h;
+            document.getElementById('avg-ats').textContent = data.usage.avg_ats_score;
+            document.getElementById('free-users').textContent = data.users.by_plan.free;
+            document.getElementById('pro-users').textContent = data.users.by_plan.pro;
+            document.getElementById('enterprise-users').textContent = data.users.by_plan.enterprise;
+            document.getElementById('last-updated').textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+        }
+
+        async function loadUserStats() {
+            const data = await apiCall('/dashboard/users');
+            if (!data) return;
+
+            document.getElementById('new-users-7d').textContent = data.new_users_7d;
+            
+            const tbody = document.getElementById('active-users-table');
+            tbody.innerHTML = data.most_active_users.map(u => `
+                <tr>
+                    <td>${u.email}</td>
+                    <td>${u.name}</td>
+                    <td>${u.analyses_run}</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                </tr>
+            `).join('');
+        }
+
+        async function loadAnalysisStats() {
+            const data = await apiCall('/dashboard/analyses');
+            if (!data) return;
+
+            document.getElementById('score-excellent').textContent = data.score_distribution.excellent;
+            document.getElementById('score-good').textContent = data.score_distribution.good;
+            document.getElementById('score-fair').textContent = data.score_distribution.fair;
+            document.getElementById('score-poor').textContent = data.score_distribution.needs_work;
+
+            const matchedTbody = document.getElementById('matched-skills-table');
+            matchedTbody.innerHTML = data.top_matched_skills.map(s => `
+                <tr><td>${s.skill}</td><td style="text-align: right;">${s.count}</td></tr>
+            `).join('');
+
+            const missingTbody = document.getElementById('missing-skills-table');
+            missingTbody.innerHTML = data.top_missing_skills.map(s => `
+                <tr><td>${s.skill}</td><td style="text-align: right;">${s.count}</td></tr>
+            `).join('');
+        }
+
+        async function loadGrowthStats() {
+            const data = await apiCall('/dashboard/growth');
+            if (!data) return;
+
+            document.getElementById('analyses-30d').textContent = data.total_analyses_30d;
+            document.getElementById('analyses-current-week').textContent = data.analyses_current_week;
+            
+            const growth = data.growth_percent >= 0 ? `+${data.growth_percent}%` : `${data.growth_percent}%`;
+            const color = data.growth_percent >= 0 ? 'var(--green)' : 'var(--red)';
+            document.getElementById('growth-indicator').innerHTML = `<div style="color: ${color}; font-weight: 600; font-size: 13px;">${growth} vs last week</div>`;
+        }
+
+        async function loadRevenueStats() {
+            const data = await apiCall('/dashboard/revenue');
+            if (!data) return;
+
+            document.getElementById('mrr').textContent = '$' + data.mrr;
+            document.getElementById('arpu').textContent = '$' + data.arpu;
+            document.getElementById('sub-free').textContent = data.subscriptions.free || 0;
+            document.getElementById('sub-pro').textContent = data.subscriptions.pro || 0;
+            document.getElementById('sub-enterprise').textContent = data.subscriptions.enterprise || 0;
+        }
+
+        function switchDash(section) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.getElementById(`section-${section}`).style.display = 'block';
+            
+            document.querySelectorAll('.admin-menu a').forEach(a => a.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (section === 'overview') loadRealTimeStats();
+            else if (section === 'users') loadUserStats();
+            else if (section === 'analyses') loadAnalysisStats();
+            else if (section === 'growth') loadGrowthStats();
+            else if (section === 'revenue') loadRevenueStats();
+        }
+
+        function logout() {
+            localStorage.removeItem('riq_tok');
+            localStorage.removeItem('riq_usr');
+            window.location.href = '/';
+        }
+
+        // Load on startup
+        loadRealTimeStats();
+        setInterval(loadRealTimeStats, 30000); // Refresh every 30 seconds
+    </script>
+</body>
+</html>

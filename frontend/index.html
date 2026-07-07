@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResumeIQ — Beat the ATS. Get Shortlisted.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ─────────────────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a0f;
+  --ink2:#1c1c28;
+  --muted:#6b6b80;
+  --muted2:#9898aa;
+  --white:#ffffff;
+  --off:#f7f7fb;
+  --accent:#5b4cff;
+  --accent2:#7c6dff;
+  --accent-lt:#eeecff;
+  --green:#12b96a;
+  --amber:#f5a623;
+  --red:#f53e3e;
+  --border:#e8e8f0;
+  --border2:#d0d0e0;
+  --r:14px;
+  --r2:10px;
+  --shadow:0 2px 16px rgba(0,0,0,0.08);
+  --shadow2:0 8px 40px rgba(0,0,0,0.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--white);overflow-x:hidden;line-height:1.6}
+h1,h2,h3,h4{font-family:'DM Sans',sans-serif;line-height:1.1;letter-spacing:-0.02em}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{font-family:'DM Sans',sans-serif;cursor:pointer}
+
+/* ── Utility ──────────────────────────────────────────────────────────────── */
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* ── Animations ───────────────────────────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(91,76,255,0.3)}70%{box-shadow:0 0 0 14px rgba(91,76,255,0)}100%{box-shadow:0 0 0 0 rgba(91,76,255,0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+@keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.anim-fade-up{opacity:0;animation:fadeUp 0.7s ease forwards}
+.anim-fade-up.d1{animation-delay:0.1s}
+.anim-fade-up.d2{animation-delay:0.2s}
+.anim-fade-up.d3{animation-delay:0.3s}
+.anim-fade-up.d4{animation-delay:0.4s}
+.anim-fade-up.d5{animation-delay:0.5s}
+.anim-fade-up.d6{animation-delay:0.6s}
+
+/* ── NAV ─────────────────────────────────────────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 0;transition:all 0.3s}
+.nav.scrolled{background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo-mark svg{display:block}
+.nav-logo-name{font-family:'DM Sans',sans-serif;font-weight:800;font-size:17px;color:var(--ink);letter-spacing:-0.02em}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;font-weight:400;color:var(--muted);transition:color 0.15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn-nav-login{padding:8px 18px;border-radius:8px;font-size:14px;font-weight:500;color:var(--ink);border:1px solid var(--border2);background:transparent;transition:all 0.15s}
+.btn-nav-login:hover{background:var(--off);border-color:var(--border2)}
+.btn-nav-signup{padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;color:white;background:var(--accent);border:none;transition:all 0.15s}
+.btn-nav-signup:hover{background:var(--accent2);transform:translateY(-1px)}
+
+/* ── HERO ────────────────────────────────────────────────────────────────── */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--white);padding-top:80px}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.12}
+.hero-blob-1{width:600px;height:600px;background:var(--accent);top:-100px;right:-100px}
+.hero-blob-2{width:400px;height:400px;background:#12b96a;bottom:-50px;left:-50px}
+.hero-blob-3{width:300px;height:300px;background:#f5a623;top:50%;left:30%;transform:translate(-50%,-50%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.4}
+.hero-inner{position:relative;z-index:2;container:max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;max-width:1100px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;background:var(--accent-lt);border:1px solid rgba(91,76,255,0.2);font-size:12px;font-weight:500;color:var(--accent);margin-bottom:24px}
+.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-ring 2s infinite}
+.hero h1{font-size:clamp(40px,5vw,62px);font-weight:800;color:var(--ink);margin-bottom:20px;line-height:1.05}
+.hero h1 .accent-word{color:var(--accent);position:relative;display:inline-block}
+.hero h1 .accent-word::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;background:var(--accent);border-radius:2px;opacity:0.4}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:36px;font-weight:300;max-width:480px}
+.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+.btn-hero-primary{padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;color:white;background:var(--accent);border:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;box-shadow:0 4px 20px rgba(91,76,255,0.3)}
+.btn-hero-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(91,76,255,0.4)}
+.btn-hero-secondary{padding:14px 28px;border-radius:10px;font-size:15px;font-weight:500;color:var(--ink);background:var(--white);border:1.5px solid var(--border2);display:inline-flex;align-items:center;gap:8px;transition:all 0.2s}
+.btn-hero-secondary:hover{background:var(--off);transform:translateY(-2px)}
+.hero-social-proof{display:flex;align-items:center;gap:12px}
+.hero-avatars{display:flex}
+.hero-avatar{width:28px;height:28px;border-radius:50%;border:2px solid white;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;margin-left:-8px;flex-shrink:0}
+.hero-avatar:first-child{margin-left:0}
+.hero-social-text{font-size:13px;color:var(--muted)}
+.hero-social-text strong{color:var(--ink)}
+
+/* ── Hero Visual ─────────────────────────────────────────────────────────── */
+.hero-visual{position:relative;animation:float 6s ease-in-out infinite}
+.hero-card{background:white;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow2)}
+.hero-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.hero-card-title{font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;color:var(--ink)}
+.score-ring-wrap{position:relative;width:90px;height:90px;margin:0 auto 14px}
+.score-ring-label{text-align:center;font-size:12px;color:var(--muted);margin-bottom:16px}
+.score-big-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-big-num span:first-child{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:800;color:var(--green)}
+.score-big-num span:last-child{font-size:10px;color:var(--muted)}
+.mini-bar{margin-bottom:10px}
+.mini-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px}
+.mini-bar-track{height:6px;background:var(--off);border-radius:3px;overflow:hidden}
+.mini-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.chip-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.mini-chip{padding:3px 9px;border-radius:12px;font-size:11px;font-weight:500}
+.mini-chip.g{background:#d1fae5;color:#065f46}
+.mini-chip.r{background:#fee2e2;color:#991b1b}
+.hero-float-badge{position:absolute;background:white;border:1px solid var(--border);border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);font-size:12px;font-weight:500;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.hero-float-1{top:-20px;right:-30px;animation:float 5s ease-in-out infinite 0.5s}
+.hero-float-2{bottom:10px;left:-40px;animation:float 5s ease-in-out infinite 1.2s}
+.float-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+/* ── LOGOS ───────────────────────────────────────────────────────────────── */
+.logos{padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--off)}
+.logos-label{text-align:center;font-size:12px;color:var(--muted2);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px}
+.logos-track{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.logo-pill{padding:8px 20px;border-radius:8px;background:white;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;color:var(--muted);letter-spacing:-0.01em}
+
+/* ── HOW IT WORKS ────────────────────────────────────────────────────────── */
+.section{padding:100px 0}
+.section-label{display:inline-block;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px}
+.section-title{font-size:clamp(30px,4vw,46px);font-weight:800;color:var(--ink);margin-bottom:16px;max-width:600px}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:520px;font-weight:300}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.step-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:28px;position:relative;transition:all 0.2s}
+.step-card:hover{border-color:var(--accent);box-shadow:0 4px 24px rgba(91,76,255,0.08);transform:translateY(-4px)}
+.step-num{font-family:'DM Sans',sans-serif;font-size:48px;font-weight:800;color:var(--accent-lt);line-height:1;margin-bottom:16px}
+.step-icon{width:44px;height:44px;border-radius:10px;background:var(--accent-lt);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.step-title{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.step-desc{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* ── FEATURES ────────────────────────────────────────────────────────────── */
+.features-bg{background:var(--ink);color:white;padding:100px 0;position:relative;overflow:hidden}
+.features-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 50%,rgba(91,76,255,0.15) 0%,transparent 60%)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;background:rgba(255,255,255,0.05);border-radius:var(--r);overflow:hidden}
+.feature-cell{padding:32px 28px;background:var(--ink);transition:background 0.2s}
+.feature-cell:hover{background:var(--ink2)}
+.feature-icon{width:40px;height:40px;border-radius:10px;background:rgba(91,76,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.feature-title{font-family:'DM Sans',sans-serif;font-size:16px;font-weight:700;color:white;margin-bottom:8px}
+.feature-desc{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6}
+.features-bg .section-title{color:white}
+.features-bg .section-sub{color:rgba(255,255,255,0.55)}
+
+/* ── STATS ───────────────────────────────────────────────────────────────── */
+.stats-section{padding:80px 0;background:var(--accent);color:white}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}
+.stat-num{font-family:'DM Sans',sans-serif;font-size:48px;font-weight:800;margin-bottom:6px}
+.stat-label{font-size:14px;opacity:0.8;font-weight:300}
+
+/* ── TESTIMONIALS ────────────────────────────────────────────────────────── */
+.testimonials{padding:100px 0;background:var(--off)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}
+.testi-card{background:white;border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:all 0.2s}
+.testi-card:hover{box-shadow:var(--shadow2);transform:translateY(-4px)}
+.testi-stars{display:flex;gap:3px;margin-bottom:14px}
+.testi-star{color:var(--amber);font-size:14px}
+.testi-quote{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:white;flex-shrink:0}
+.testi-name{font-size:13px;font-weight:600;color:var(--ink)}
+.testi-role{font-size:12px;color:var(--muted)}
+
+/* ── PRICING ─────────────────────────────────────────────────────────────── */
+.pricing{padding:100px 0}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px;align-items:start}
+.price-card{background:white;border:1.5px solid var(--border);border-radius:var(--r);padding:32px;transition:all 0.2s}
+.price-card.featured{border-color:var(--accent);box-shadow:0 8px 40px rgba(91,76,255,0.15)}
+.price-badge{display:inline-block;padding:4px 12px;border-radius:20px;background:var(--accent);color:white;font-size:11px;font-weight:600;margin-bottom:16px}
+.price-name{font-family:'DM Sans',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.price-amount{font-family:'DM Sans',sans-serif;font-size:40px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.price-amount span{font-size:16px;font-weight:400;color:var(--muted)}
+.price-period{font-size:13px;color:var(--muted);margin-bottom:24px}
+.price-features{list-style:none;margin-bottom:28px}
+.price-features li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border)}
+.price-features li:last-child{border-bottom:none}
+.price-check{width:18px;height:18px;border-radius:50%;background:var(--accent-lt);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px}
+.btn-price{width:100%;padding:12px;border-radius:10px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif}
+.btn-price-outline{background:transparent;border:1.5px solid var(--border2);color:var(--ink)}
+.btn-price-outline:hover{background:var(--off)}
+.btn-price-filled{background:var(--accent);color:white}
+.btn-price-filled:hover{background:var(--accent2);transform:translateY(-1px)}
+
+/* ── CTA BANNER ──────────────────────────────────────────────────────────── */
+.cta-banner{padding:80px 0;background:var(--ink);position:relative;overflow:hidden}
+.cta-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(91,76,255,0.2),transparent 60%)}
+.cta-inner{position:relative;text-align:center}
+.cta-title{font-size:clamp(28px,4vw,48px);font-weight:800;color:white;margin-bottom:14px}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.6);margin-bottom:36px;font-weight:300}
+.btn-cta{padding:16px 36px;border-radius:12px;font-size:15px;font-weight:600;color:var(--accent);background:white;border:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,255,255,0.2)}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────────── */
+.footer{padding:60px 0 32px;background:var(--ink2);color:rgba(255,255,255,0.6)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand p{font-size:13px;line-height:1.7;margin-top:12px;max-width:240px}
+.footer-col-title{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:white;margin-bottom:16px;letter-spacing:0.05em;text-transform:uppercase}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.5);transition:color 0.15s}
+.footer-links a:hover{color:white}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:12px}
+
+/* ── PAGES (Auth + App) ───────────────────────────────────────────────────── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── AUTH ────────────────────────────────────────────────────────────────── */
+.auth-overlay{min-height:100vh;background:var(--off);display:flex;flex-direction:column}
+.auth-nav{padding:18px 32px;display:flex;align-items:center;justify-content:space-between;background:white;border-bottom:1px solid var(--border)}
+.auth-body{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.auth-card{width:100%;max-width:440px;background:white;border:1px solid var(--border);border-radius:20px;padding:40px;box-shadow:var(--shadow2)}
+.auth-head{text-align:center;margin-bottom:32px}
+.auth-logo-icon{width:52px;height:52px;border-radius:14px;background:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.auth-title{font-family:'DM Sans',sans-serif;font-size:24px;font-weight:800;color:var(--ink);margin-bottom:6px}
+.auth-sub{font-size:14px;color:var(--muted);font-weight:300}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:6px}
+.form-input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;color:var(--ink);background:white;outline:none;transition:border-color 0.15s;font-family:'DM Sans',sans-serif}
+.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,76,255,0.1)}
+.form-input::placeholder{color:var(--muted2)}
+.btn-auth{width:100%;padding:13px;border-radius:10px;font-size:15px;font-weight:600;color:white;background:var(--accent);border:none;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-auth:hover{background:var(--accent2)}
+.btn-auth:disabled{opacity:0.6;cursor:not-allowed}
+.auth-switch{text-align:center;margin-top:20px;font-size:13px;color:var(--muted)}
+.auth-switch a{color:var(--accent);font-weight:500;cursor:pointer}
+.otp-row{display:flex;gap:10px;justify-content:center;margin:20x 0}
+.otp-box{width:48px;height:56px;border:2px solid var(--border);border-radius:10px;text-align:center;font-size:24px;font-weight:700;font-family:'DM Sans',sans-serif;color:var(--accent);outline:none;transition:border-color 0.15s}
+.otp-box:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,76,255,0.1)}
+.alert{padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;display:none;animation:slideIn 0.2s ease}
+.alert.show{display:block}
+.alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
+.alert-success{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7}
+.alert-info{background:var(--accent-lt);color:var(--accent);border:1px solid rgba(91,76,255,0.2)}
+.divider-or{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--muted2);font-size:13px}
+.divider-or::before,.divider-or::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── APP ─────────────────────────────────────────────────────────────────── */
+.app-shell{display:flex;min-height:100vh;flex-direction:column}
+.app-header{background:white;border-bottom:1px solid var(--border);padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.app-logo{display:flex;align-items:center;gap:9px}
+.app-logo-mark{width:28px;height:28px;border-radius:7px;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.app-logo-name{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;color:var(--ink)}
+.app-user{display:flex;align-items:center;gap:12px}
+.app-user-pill{display:flex;align-items:center;gap:8px;padding:5px 12px;border-radius:20px;background:var(--off);font-size:13px;color:var(--ink2)}
+.app-avatar{width:24px;height:24px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white}
+.btn-signout{padding:6px 14px;border-radius:8px;border:1px solid var(--border2);background:transparent;font-size:12px;color:var(--muted);cursor:pointer}
+.btn-signout:hover{background:var(--off)}
+
+.app-layout{display:flex;flex:1}
+.sidebar{width:220px;background:white;border-right:1px solid var(--border);padding:20px 12px;flex-shrink:0}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:14px;color:var(--muted);cursor:pointer;margin-bottom:4px;transition:all 0.15s}
+.nav-item:hover{background:var(--off);color:var(--ink)}
+.nav-item.active{background:var(--accent-lt);color:var(--accent);font-weight:500}
+.nav-divider{height:1px;background:var(--border);margin:14px 0}
+.app-main{flex:1;overflow-y:auto;background:var(--off)}
+.view{display:none;padding:32px}
+.view.active{display:block}
+
+/* ── DASHBOARD ───────────────────────────────────────────────────────────── */
+.dash-hero-card{background:var(--accent);border-radius:18px;padding:32px 36px;color:white;margin-bottom:24px;position:relative;overflow:hidden}
+.dash-hero-card::after{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;background:rgba(255,255,255,0.07);border-radius:50%}
+.dash-hero-card h2{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px}
+.dash-hero-card p{font-size:14px;opacity:0.85;font-weight:300}
+.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.dash-stat{background:white;border:1px solid var(--border);border-radius:14px;padding:20px 22px}
+.dash-stat-val{font-family:'DM Sans',sans-serif;font-size:32px;font-weight:800;color:var(--accent)}
+.dash-stat-lbl{font-size:13px;color:var(--muted);margin-top:2px}
+.section-card{background:white;border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-bottom:20px}
+.section-card-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.section-card-title{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;color:var(--ink)}
+.how-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.how-card{background:var(--off);border-radius:12px;padding:18px;text-align:center}
+.how-card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.how-card-title{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.how-card-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ── ANALYZE ─────────────────────────────────────────────────────────────── */
+.upload-zone{border:2px dashed var(--border2);border-radius:14px;padding:40px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--off)}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--accent);background:#f5f3ff}
+.upload-zone.uploaded{border-color:var(--green);background:#f0fdf4;border-style:solid}
+.upload-icon-wrap{width:52px;height:52px;border-radius:14px;background:var(--accent-lt);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.upload-label{font-size:15px;font-weight:500;color:var(--ink2);margin-bottom:4px}
+.upload-sub{font-size:12px;color:var(--muted)}
+.file-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#d1fae5;border:1px solid #6ee7b7;border-radius:10px;margin-top:12px;font-size:13px;color:#065f46}
+.btn-primary{padding:11px 22px;border-radius:10px;font-size:14px;font-weight:600;color:white;background:var(--accent);border:none;cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.btn-secondary{padding:11px 22px;border-radius:10px;font-size:14px;font-weight:500;color:var(--ink);background:white;border:1.5px solid var(--border2);cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans',sans-serif}
+.btn-secondary:hover{background:var(--off)}
+.tab-bar{display:flex;gap:4px;padding:4px;background:var(--off);border-radius:12px;margin-bottom:22px}
+.tab-btn{flex:1;padding:9px 12px;border:none;cursor:pointer;border-radius:9px;font-size:13px;font-weight:400;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.tab-btn.active{background:white;color:var(--ink);font-weight:600;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+.score-ring-lg{position:relative;width:140px;height:140px}
+.score-center-lg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-num-lg{font-family:'DM Sans',sans-serif;font-size:36px;font-weight:800}
+.score-den-lg{font-size:13px;color:var(--muted)}
+.bar-item{margin-bottom:14px}
+.bar-meta{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;color:var(--muted)}
+.bar-track{height:8px;background:var(--off);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease}
+.chip{display:inline-block;padding:4px 11px;border-radius:14px;font-size:12px;font-weight:500;margin:3px}
+.chip-g{background:#d1fae5;color:#065f46}
+.chip-r{background:#fee2e2;color:#991b1b}
+.chip-y{background:#fef3c7;color:#92400e}
+.chip-gray{background:var(--off);color:var(--muted)}
+.verdict{padding:13px 16px;border-radius:10px;font-size:13px;margin-top:14px}
+.insights-text{font-size:14px;line-height:1.85;color:var(--ink2);white-space:pre-wrap}
+.insights-text strong{color:var(--accent)}
+.opt-pre{background:var(--off);border:1px solid var(--border);border-radius:10px;padding:18px;font-size:13px;font-family:'Courier New',monospace;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:500px;overflow-y:auto;color:var(--ink2)}
+.template-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.template-card{border:1px solid var(--border);border-radius:12px;padding:18px;background:white;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+.template-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px}
+.template-title{font-size:15px;font-weight:700;color:var(--ink)}
+.template-score{font-size:22px;font-weight:800;color:var(--accent);line-height:1}
+.template-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.result-extra{margin-top:18px;padding-top:18px;border-top:1px solid var(--border)}
+.result-extra h4{font-size:14px;margin-bottom:10px;color:var(--ink)}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.category-card{border:1px solid var(--border);border-radius:10px;padding:12px;background:white}
+.category-card-name{font-size:12px;color:var(--muted);margin-bottom:6px}
+.category-card-score{font-size:20px;font-weight:800}
+.rec-card{border-left:4px solid var(--accent);background:var(--off);border-radius:10px;padding:11px 13px;margin-bottom:8px;font-size:13px;color:var(--ink2)}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.role-card{border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:12px;background:white}
+.role-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.role-meta{font-size:12px;color:var(--muted)}
+.detail-pre{background:var(--off);border:1px solid var(--border);border-radius:10px;padding:14px;font-size:12px;font-family:'Courier New',monospace;line-height:1.6;white-space:pre-wrap;max-height:260px;overflow:auto;color:var(--ink2)}
+.hist-row{display:flex;align-items:center;gap:16px;padding:14px 16px;border-radius:12px;border:1px solid var(--border);margin-bottom:10px;background:white;cursor:pointer;transition:border-color 0.15s}
+.hist-row:hover{border-color:var(--accent)}
+.hist-badge{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;flex-shrink:0}
+.hist-info{flex:1;min-width:0}
+.hist-title{font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hist-meta{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* ── Spinner ──────────────────────────────────────────────────────────────── */
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.4);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle}
+.spinner-dark{border-color:rgba(91,76,255,0.2);border-top-color:var(--accent)}
+.empty-state{text-align:center;padding:56px 24px}
+.empty-icon{font-size:44px;margin-bottom:16px}
+.empty-title{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.empty-sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+.view-title{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.view-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero-visual{display:none}
+  .hero-actions{justify-content:center}
+  .hero-social-proof{justify-content:center}
+  .steps{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .testi-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .dash-stats{grid-template-columns:1fr}
+  .how-cards{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .two-col{grid-template-columns:1fr}
+}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     LANDING PAGE
+════════════════════════════════════════════════════════ -->
+<div id="page-landing" class="page active">
+
+  <!-- NAV -->
+  <nav class="nav" id="main-nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="nav-logo-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <span class="nav-logo-name">ResumeIQ</span>
+      </div>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="nav-cta">
+        <button class="btn-nav-login" onclick="showPage('page-login')">Sign in</button>
+        <button class="btn-nav-signup" onclick="showPage('page-register')">Get started free →</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+      <div class="hero-blob hero-blob-3"></div>
+    </div>
+    <div class="hero-inner container">
+      <div class="hero-content">
+        <div class="anim-fade-up d1">
+          <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> AI-Powered ATS Optimization</div>
+        </div>
+        <h1 class="anim-fade-up d2">Beat the ATS.<br>Get <span class="accent-word">Shortlisted</span>.</h1>
+        <p class="hero-sub anim-fade-up d3">ResumeIQ analyzes your resume against any job description, gives you an ATS compatibility score, identifies missing skills, and rewrites your resume using Gemini AI — with a downloadable PDF.</p>
+        <div class="hero-actions anim-fade-up d4">
+          <button class="btn-hero-primary" onclick="showPage('page-register')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Analyze my resume free
+          </button>
+          <button class="btn-hero-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">
+            See how it works ↓
+          </button>
+        </div>
+        <div class="hero-social-proof anim-fade-up d5">
+          <div class="hero-avatars">
+            <div class="hero-avatar">HK</div>
+            <div class="hero-avatar" style="background:#12b96a">AR</div>
+            <div class="hero-avatar" style="background:#f5a623">MS</div>
+            <div class="hero-avatar" style="background:#f53e3e">PK</div>
+          </div>
+          <div class="hero-social-text"><strong>2,400+</strong> resumes optimized this month</div>
+        </div>
+      </div>
+      <div class="hero-visual anim-fade-up d3">
+        <div class="hero-float-badge hero-float-1">
+          <div class="float-icon" style="background:#d1fae5">✓</div>
+          <div><div style="font-weight:600;font-size:12px;color:#065f46">Score improved</div><div style="font-size:11px;color:#6b7280">42 → 81 points</div></div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span class="hero-card-title">ATS Analysis</span>
+            <span style="font-size:11px;padding:3px 8px;background:#d1fae5;color:#065f46;border-radius:8px;font-weight:600">Live</span>
+          </div>
+          <div class="score-ring-wrap">
+            <svg width="90" height="90" viewBox="0 0 90 90" style="transform:rotate(-90deg)">
+              <circle cx="45" cy="45" r="38" fill="none" stroke="#f0f0f8" stroke-width="8"/>
+              <circle cx="45" cy="45" r="38" fill="none" stroke="#12b96a" stroke-width="8" stroke-dasharray="238.76" stroke-dashoffset="57" stroke-linecap="round"/>
+            </svg>
+            <div class="score-big-num"><span>76</span><span>/100</span></div>
+          </div>
+          <div class="score-ring-label">ATS Compatibility Score</div>
+          <div class="mini-bar">
+            <div class="mini-bar-label"><span>Keyword Match</span><span style="color:#12b96a;font-weight:600">82%</span></div>
+            <div class="mini-bar-track"><div class="mini-bar-fill" style="width:82%;background:#12b96a"></div></div>
+          </div>
+          <div class="mini-bar">
+            <div class="mini-bar-label"><span>Semantic Match</span><span style="color:#5b4cff;font-weight:600">68%</span></div>
+            <div class="mini-bar-track"><div class="mini-bar-fill" style="width:68%;background:#5b4cff"></div></div>
+          </div>
+          <div class="chip-row">
+            <span class="mini-chip g">Python</span>
+            <span class="mini-chip g">FastAPI</span>
+            <span class="mini-chip g">AWS</span>
+            <span class="mini-chip r">Kubernetes</span>
+            <span class="mini-chip r">Terraform</span>
+          </div>
+        </div>
+        <div class="hero-float-badge hero-float-2">
+          <div class="float-icon" style="background:#eeecff">✨</div>
+          <div><div style="font-weight:600;font-size:12px;color:#4a3acc">PDF Generated</div><div style="font-size:11px;color:#6b7280">Optimized resume ready</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS -->
+  <div class="logos">
+    <div class="container">
+      <div class="logos-label">Resume optimized for roles at</div>
+      <div class="logos-track">
+        <div class="logo-pill">Google</div>
+        <div class="logo-pill">Amazon</div>
+        <div class="logo-pill">Microsoft</div>
+        <div class="logo-pill">Flipkart</div>
+        <div class="logo-pill">Infosys</div>
+        <div class="logo-pill">Razorpay</div>
+        <div class="logo-pill">CRED</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="anim-fade-up">
+        <div class="section-label">How it works</div>
+        <h2 class="section-title">From upload to optimized in 3 steps</h2>
+        <p class="section-sub">No manual editing. No guessing. Just paste your resume and the job description — we handle the rest.</p>
+      </div>
+      <div class="steps">
+        <div class="step-card anim-fade-up d1">
+          <div class="step-num">01</div>
+          <div class="step-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+          <div class="step-title">Upload your resume</div>
+          <div class="step-desc">Upload your existing resume in PDF, DOCX, or TXT format. We extract and analyse the full text automatically.</div>
+        </div>
+        <div class="step-card anim-fade-up d2">
+          <div class="step-num">02</div>
+          <div class="step-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div class="step-title">Paste the job description</div>
+          <div class="step-desc">Copy any job description and paste it in. Our ATS engine extracts required skills and scores your resume against it.</div>
+        </div>
+        <div class="step-card anim-fade-up d3">
+          <div class="step-num">03</div>
+          <div class="step-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="step-title">Get your optimized PDF</div>
+          <div class="step-desc">Gemini AI rewrites your resume to match the role, fills missing keywords, and generates a professionally formatted PDF.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-bg" id="features">
+    <div class="container">
+      <div class="section-label" style="color:rgba(255,255,255,0.5)">Features</div>
+      <h2 class="section-title" style="color:white">Everything you need to get shortlisted</h2>
+      <p class="section-sub">Built for software engineers, ML practitioners, and tech professionals targeting competitive roles.</p>
+      <div class="features-grid">
+        <div class="feature-cell">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
+          <div class="feature-title">ATS Scoring Engine</div>
+          <div class="feature-desc">Keyword match (60%) + semantic similarity (40%) composite score. 200+ skills across languages, frameworks, cloud, and ML.</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="feature-title">Skill Gap Analysis</div>
+          <div class="feature-desc">See exactly which skills the JD requires, which you have, and which are missing. Colour-coded for instant clarity.</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="feature-title">Gemini AI Rewrite</div>
+          <div class="feature-desc">Full resume rewrite using Gemini 1.5 Flash. Missing keywords woven in naturally. Bullets rewritten with impact metrics.</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+          <div class="feature-title">PDF Generation</div>
+          <div class="feature-desc">Professionally formatted, ATS-friendly PDF. Clean layout with proper sections, no tables or columns that confuse parsers.</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg></div>
+          <div class="feature-title">Email OTP Auth</div>
+          <div class="feature-desc">Secure registration with email verification. JWT-based sessions with refresh tokens. Your data stays private.</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+          <div class="feature-title">Analysis History</div>
+          <div class="feature-desc">Every analysis saved. Compare scores across different jobs, revisit old optimizations, download PDFs anytime.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div><div class="stat-num">75%</div><div class="stat-label">of companies use ATS to filter resumes before a human sees them</div></div>
+        <div><div class="stat-num">3 in 4</div><div class="stat-label">resumes are rejected by ATS before reaching a recruiter</div></div>
+        <div><div class="stat-num">+38pts</div><div class="stat-label">average ATS score improvement after optimization</div></div>
+        <div><div class="stat-num">200+</div><div class="stat-label">skills tracked across languages, frameworks, cloud and ML</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">Helped engineers get shortlisted</h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-quote">"My ATS score went from 41 to 79 after the AI optimization. Got a callback from Amazon within a week of applying with the new resume."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:var(--accent)">AR</div>
+            <div><div class="testi-name">Arjun R.</div><div class="testi-role">Backend Engineer, Bangalore</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-quote">"I had no idea my resume was missing so many keywords. The skill gap analysis showed me exactly what to fix. Landed interviews at 3 out of 5 companies I applied to."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:var(--green)">MS</div>
+            <div><div class="testi-name">Meera S.</div><div class="testi-role">ML Engineer, Hyderabad</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-quote">"The PDF output looks professional and clean. Recruiters actually commented on how well-structured my resume was. This tool is genuinely useful."</div>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:var(--amber)">PK</div>
+            <div><div class="testi-name">Pradeep K.</div><div class="testi-role">Full Stack Developer, Chennai</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple, transparent pricing</h2>
+      <p class="section-sub">Start free. Upgrade when you need more analyses.</p>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-name">Free</div>
+          <div class="price-amount">₹0<span>/mo</span></div>
+          <div class="price-period">Forever free</div>
+          <ul class="price-features">
+            <li><span class="price-check">✓</span>3 analyses per month</li>
+            <li><span class="price-check">✓</span>ATS score + skill gap</li>
+            <li><span class="price-check">✓</span>AI insights</li>
+            <li><span class="price-check">✓</span>1 PDF download</li>
+            <li><span class="price-check">✓</span>Analysis history</li>
+          </ul>
+          <button class="btn-price btn-price-outline" onclick="showPage('page-register')">Get started</button>
+        </div>
+        <div class="price-card featured">
+          <div class="price-badge">Most popular</div>
+          <div class="price-name">Pro</div>
+          <div class="price-amount">₹299<span>/mo</span></div>
+          <div class="price-period">Billed monthly</div>
+          <ul class="price-features">
+            <li><span class="price-check">✓</span>Unlimited analyses</li>
+            <li><span class="price-check">✓</span>ATS score + skill gap</li>
+            <li><span class="price-check">✓</span>AI insights + rewrite</li>
+            <li><span class="price-check">✓</span>Unlimited PDFs</li>
+            <li><span class="price-check">✓</span>Priority AI processing</li>
+          </ul>
+          <button class="btn-price btn-price-filled" onclick="showPage('page-register')">Start free trial</button>
+        </div>
+        <div class="price-card">
+          <div class="price-name">Teams</div>
+          <div class="price-amount">₹999<span>/mo</span></div>
+          <div class="price-period">Up to 5 members</div>
+          <ul class="price-features">
+            <li><span class="price-check">✓</span>Everything in Pro</li>
+            <li><span class="price-check">✓</span>5 team members</li>
+            <li><span class="price-check">✓</span>Shared analysis history</li>
+            <li><span class="price-check">✓</span>API access</li>
+            <li><span class="price-check">✓</span>Priority support</li>
+          </ul>
+          <button class="btn-price btn-price-outline" onclick="showPage('page-register')">Contact us</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <div class="container">
+      <div class="cta-inner">
+        <h2 class="cta-title">Your next job starts with a better resume.</h2>
+        <p class="cta-sub">Join thousands of engineers who optimized their resume with ResumeIQ. Free to start, no credit card needed.</p>
+        <button class="btn-cta" onclick="showPage('page-register')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Analyze my resume — it's free
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:28px;height:28px;border-radius:7px;background:var(--accent);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+            <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:15px;color:white">ResumeIQ</span>
+          </div>
+          <p>AI-powered resume optimization platform. Beat the ATS, get shortlisted, land the job.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Product</div>
+          <ul class="footer-links">
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Account</div>
+          <ul class="footer-links">
+            <li><a onclick="showPage('page-register')" style="cursor:pointer">Sign up free</a></li>
+            <li><a onclick="showPage('page-login')" style="cursor:pointer">Sign in</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Support</div>
+          <ul class="footer-links">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 ResumeIQ. Built in Bangalore 🇮🇳</span>
+        <span>Made for engineers, by engineers</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     LOGIN PAGE
+════════════════════════════════════════════════════════ -->
+<div id="page-login" class="page">
+  <div class="auth-overlay">
+    <div class="auth-nav">
+      <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onclick="showPage('page-landing')">
+        <div style="width:28px;height:28px;border-radius:7px;background:var(--accent);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--ink)">ResumeIQ</span>
+      </div>
+      <button class="btn-nav-signup" onclick="showPage('page-register')">Create account →</button>
+    </div>
+    <div class="auth-body">
+      <div class="auth-card">
+        <div class="auth-head">
+          <div class="auth-logo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+          <div class="auth-title">Welcome back</div>
+          <div class="auth-sub">Sign in to your ResumeIQ account</div>
+        </div>
+        <div id="login-alert" class="alert"></div>
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" id="login-email" class="form-input" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="btn-auth" id="login-btn" onclick="doLogin()">Sign In</button>
+        <div class="auth-switch">Don't have an account? <a onclick="showPage('page-register')">Create one free</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     REGISTER PAGE
+════════════════════════════════════════════════════════ -->
+<div id="page-register" class="page">
+  <div class="auth-overlay">
+    <div class="auth-nav">
+      <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onclick="showPage('page-landing')">
+        <div style="width:28px;height:28px;border-radius:7px;background:var(--accent);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--ink)">ResumeIQ</span>
+      </div>
+      <button class="btn-nav-login" onclick="showPage('page-login')">Sign in instead</button>
+    </div>
+    <div class="auth-body">
+      <div class="auth-card">
+        <div class="auth-head">
+          <div class="auth-logo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+          <div class="auth-title">Create your account</div>
+          <div class="auth-sub">Free to start — no credit card needed</div>
+        </div>
+        <div id="register-alert" class="alert"></div>
+        <div class="form-group">
+          <label class="form-label">Full name</label>
+          <input type="text" id="reg-name" class="form-input" placeholder="R Harish Karthik">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password <span style="color:var(--muted2);font-size:11px;font-weight:400">(min 8 characters)</span></label>
+          <input type="password" id="reg-password" class="form-input" placeholder="••••••••">
+        </div>
+        <button class="btn-auth" id="register-btn" onclick="doRegister()">Create Account →</button>
+        <div class="auth-switch">Already have an account? <a onclick="showPage('page-login')">Sign in</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     OTP PAGE
+════════════════════════════════════════════════════════ -->
+<div id="page-otp" class="page">
+  <div class="auth-overlay">
+    <div class="auth-nav">
+      <div style="display:flex;align-items:center;gap:9px;cursor:pointer" onclick="showPage('page-landing')">
+        <div style="width:28px;height:28px;border-radius:7px;background:var(--accent);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--ink)">ResumeIQ</span>
+      </div>
+    </div>
+    <div class="auth-body">
+      <div class="auth-card">
+        <div class="auth-head">
+          <div class="auth-logo-icon" style="background:var(--green)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.25h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l1.22-.95a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div class="auth-title">Check your email</div>
+          <div class="auth-sub" id="otp-sub">We sent a 6-digit code to your email</div>
+        </div>
+        <!-- OTP no-email notice -->
+        <div id="otp-dev-notice" class="alert alert-info show" style="font-size:12px;line-height:1.5">
+          <strong>No email configured?</strong> Check the terminal where Docker is running — look for a line that says <code>>>> 123456 <<<</code> — that's your OTP.
+        </div>
+        <div id="otp-alert" class="alert"></div>
+        <div class="otp-row">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-box" id="o0" oninput="otpNext(0)" onkeydown="otpBack(event,0)">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-box" id="o1" oninput="otpNext(1)" onkeydown="otpBack(event,1)">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-box" id="o2" oninput="otpNext(2)" onkeydown="otpBack(event,2)">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-box" id="o3" oninput="otpNext(3)" onkeydown="otpBack(event,3)">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-box" id="o4" oninput="otpNext(4)" onkeydown="otpBack(event,4)">
+          <input type="text" inputmode="numeric" maxlength="1" class="otp-box" id="o5" oninput="otpNext(5)" onkeydown="otpBack(event,5)">
+        </div>
+        <button class="btn-auth" id="otp-btn" onclick="doVerifyOTP()">Verify & Continue</button>
+        <div style="text-align:center;margin-top:14px;font-size:13px;color:var(--muted)">
+          Didn't receive it? <a style="color:var(--accent);cursor:pointer;font-weight:500" onclick="doResendOTP()">Resend OTP</a>
+        </div>
+        <div class="auth-switch"><a onclick="showPage('page-login')">← Back to login</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     APP PAGE
+════════════════════════════════════════════════════════ -->
+<div id="page-app" class="page">
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="app-logo">
+        <div class="app-logo-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+        <span class="app-logo-name">ResumeIQ</span>
+      </div>
+      <div class="app-user">
+        <div class="app-user-pill">
+          <div class="app-avatar" id="app-avatar">HK</div>
+          <span id="app-username">Harish</span>
+        </div>
+        <button class="btn-signout" onclick="logout()">Sign out</button>
+      </div>
+    </header>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="nav-item active" id="nav-dashboard" onclick="switchView('dashboard')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard
+        </div>
+        <div class="nav-item" id="nav-analyze" onclick="switchView('analyze')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Analyze Resume
+        </div>
+        <div class="nav-item" id="nav-templates" onclick="switchView('templates')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="7"/><rect x="14" y="4" width="7" height="7"/><rect x="3" y="15" width="7" height="5"/><rect x="14" y="15" width="7" height="5"/></svg>Templates
+        </div>
+        <div class="nav-item" id="nav-history" onclick="switchView('history')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>History
+        </div>
+        <div class="nav-divider"></div>
+        <div class="nav-item" onclick="logout()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16,17 21,12 16,7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign Out
+        </div>
+      </aside>
+      <main class="app-main">
+        <!-- DASHBOARD -->
+        <div id="view-dashboard" class="view active">
+          <div class="dash-hero-card">
+            <h2 id="dash-greeting">Good morning 👋</h2>
+            <p>Your AI-powered resume optimization platform. Upload, score, optimize.</p>
+          </div>
+          <div class="dash-stats">
+            <div class="dash-stat"><div class="dash-stat-val" id="s-resumes">0</div><div class="dash-stat-lbl">Resumes uploaded</div></div>
+            <div class="dash-stat"><div class="dash-stat-val" id="s-analyses">0</div><div class="dash-stat-lbl">Analyses run</div></div>
+            <div class="dash-stat"><div class="dash-stat-val" id="s-best">—</div><div class="dash-stat-lbl">Best ATS score</div></div>
+          </div>
+          <div class="section-card">
+            <div class="section-card-hdr"><span class="section-card-title">Quick Start</span></div>
+            <div class="how-cards">
+              <div class="how-card"><div class="how-card-icon" style="background:#eeecff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><div class="how-card-title">1. Upload Resume</div><div class="how-card-desc">PDF, DOCX or TXT</div></div>
+              <div class="how-card"><div class="how-card-icon" style="background:#fef3c7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="how-card-title">2. Paste JD</div><div class="how-card-desc">Any job description</div></div>
+              <div class="how-card"><div class="how-card-icon" style="background:#d1fae5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div><div class="how-card-title">3. Get PDF</div><div class="how-card-desc">Optimized & downloadable</div></div>
+            </div>
+            <div style="text-align:center;margin-top:16px"><button class="btn-primary" onclick="switchView('analyze')">Start Analysis →</button></div>
+          </div>
+          <div class="section-card">
+            <div class="section-card-hdr"><span class="section-card-title">Recent Analyses</span><button class="btn-secondary" style="padding:6px 14px;font-size:12px" onclick="switchView('history')">View all</button></div>
+            <div id="dash-recent"></div>
+          </div>
+        </div>
+
+        <!-- ANALYZE -->
+        <div id="view-analyze" class="view">
+          <div class="view-title">Analyze Your Resume</div>
+          <div class="view-sub">Upload your resume, paste a job description, get your ATS score and optimized PDF.</div>
+
+          <!-- Step 1 Upload -->
+          <div class="section-card" id="card-upload">
+            <div class="section-card-hdr">
+              <span class="section-card-title">Step 1 — Upload Resume</span>
+              <span id="upload-ok" style="display:none;font-size:12px;padding:3px 10px;background:#d1fae5;color:#065f46;border-radius:8px;font-weight:600">✓ Uploaded</span>
+            </div>
+            <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()" ondragover="dov(event)" ondragleave="dol(event)" ondrop="dof(event)">
+              <input type="file" id="file-input" accept=".pdf,.docx,.txt" style="display:none" onchange="onFile(event)">
+              <div class="upload-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+              <div class="upload-label" id="upload-label">Drop your resume here or click to browse</div>
+              <div class="upload-sub">PDF · DOCX · TXT — max 5MB</div>
+            </div>
+            <div id="file-bar" style="display:none" class="file-bar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+              <span id="file-bar-text"></span>
+              <button onclick="clearFile()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:#065f46;font-size:12px">✕</button>
+            </div>
+            <div id="upload-alert" class="alert"></div>
+            <div style="margin-top:14px;text-align:right">
+              <button class="btn-primary" id="upload-btn" onclick="doUpload()" disabled>Upload Resume →</button>
+            </div>
+          </div>
+
+          <!-- Step 2 JD -->
+          <div class="section-card" id="card-jd" style="opacity:0.45;pointer-events:none">
+            <div class="section-card-hdr"><span class="section-card-title">Step 2 — Job Description</span></div>
+            <div class="form-group"><label class="form-label">Job Title (optional)</label><input type="text" id="jd-title" class="form-input" placeholder="e.g. Senior Backend Engineer at Google"></div>
+            <div class="form-group"><label class="form-label">Job Description <span style="color:var(--red)">*</span></label><textarea id="jd-text" class="form-input" style="min-height:180px;resize:vertical;font-family:monospace;font-size:13px" placeholder="Paste the full job description here..."></textarea></div>
+            <div id="jd-alert" class="alert"></div>
+            <div style="text-align:right"><button class="btn-primary" id="analyze-btn" onclick="doAnalyze()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Run ATS Analysis</button></div>
+          </div>
+
+          <!-- Results -->
+          <div id="results-wrap" style="display:none">
+            <div class="section-card">
+              <div class="section-card-hdr">
+                <span class="section-card-title">Analysis Results</span>
+                <div style="display:flex;gap:8px">
+                  <button class="btn-secondary" style="padding:7px 14px;font-size:13px" onclick="resetAnalyze()">New Analysis</button>
+                  <button class="btn-primary" id="opt-btn" onclick="doOptimize()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Optimize with AI</button>
+                </div>
+              </div>
+              <div class="tab-bar">
+                <button class="tab-btn active" onclick="rTab('score',this)">ATS Score</button>
+                <button class="tab-btn" onclick="rTab('skills',this)">Skills</button>
+                <button class="tab-btn" onclick="rTab('insights',this)">AI Insights</button>
+                <button class="tab-btn" id="opt-tab-btn" onclick="rTab('optimized',this)">Optimized</button>
+              </div>
+              <div id="rtab-score">
+                <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
+                  <div style="text-align:center">
+                    <div class="score-ring-lg">
+                      <svg width="140" height="140" viewBox="0 0 140 140" style="transform:rotate(-90deg)">
+                        <circle cx="70" cy="70" r="58" fill="none" stroke="var(--off)" stroke-width="10"/>
+                        <circle cx="70" cy="70" r="58" fill="none" id="score-circle" stroke="var(--green)" stroke-width="10" stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="364.4" style="transition:stroke-dashoffset 1s ease"/>
+                      </svg>
+                      <div class="score-center-lg">
+                        <div class="score-num-lg" id="score-display" style="color:var(--muted2)">—</div>
+                        <div class="score-den-lg">/ 100</div>
+                      </div>
+                    </div>
+                    <div id="score-label-txt" style="font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;margin-top:8px;color:var(--muted)">—</div>
+                  </div>
+                  <div style="flex:1;min-width:220px">
+                    <div class="bar-item"><div class="bar-meta"><span>Keyword Match (60%)</span><span id="kw-pct" style="font-weight:600">—</span></div><div class="bar-track"><div class="bar-fill" id="kw-bar" style="width:0%"></div></div></div>
+                    <div class="bar-item"><div class="bar-meta"><span>Semantic Similarity (40%)</span><span id="sem-pct" style="font-weight:600">—</span></div><div class="bar-track"><div class="bar-fill" id="sem-bar" style="width:0%;background:var(--accent)"></div></div></div>
+                    <div id="verdict" class="verdict" style="display:none"></div>
+                  </div>
+                </div>
+              </div>
+              <div id="rtab-skills" style="display:none">
+                <div class="two-col">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:10px">✓ Matched (<span id="mc">0</span>)</div><div id="matched-list"></div></div>
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:10px">✗ Missing (<span id="xc">0</span>)</div><div id="missing-list"></div></div>
+                </div>
+              </div>
+              <div id="rtab-insights" style="display:none"><div id="insights-body" class="insights-text">Loading AI insights...</div></div>
+              <div id="rtab-optimized" style="display:none"><div id="opt-content"></div></div>
+              <div id="results-alert" class="alert"></div>
+              <div id="category-section" class="result-extra" style="display:none"></div>
+              <div id="recommendations-section" class="result-extra" style="display:none"></div>
+              <div id="roles-section" class="result-extra" style="display:none"></div>
+              <div id="detailed-section" class="result-extra" style="display:none"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TEMPLATES -->
+        <div id="view-templates" class="view">
+          <div class="view-title">Resume Templates</div>
+          <div class="view-sub">ATS-friendly starter formats you can inspect and download.</div>
+          <div class="section-card">
+            <div class="section-card-hdr">
+              <span class="section-card-title">Template Library</span>
+            </div>
+            <div id="templates-alert" class="alert"></div>
+            <div id="templates-grid" class="template-grid"></div>
+          </div>
+        </div>
+
+        <!-- HISTORY -->
+        <div id="view-history" class="view">
+          <div class="view-title">Analysis History</div>
+          <div class="view-sub">All your previous analyses</div>
+          <div class="section-card"><div id="hist-list"></div></div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Config ───────────────────────────────────────────────────────────────────
+function resolveApiBase() {
+  if (window.RESUMEIQ_API) return String(window.RESUMEIQ_API).replace(/\/$/, '');
+  const localHosts = new Set(['localhost', '127.0.0.1', '::1']);
+  const localStaticPorts = new Set(['3000', '5173', '5500', '8000', '8080']);
+  if (localHosts.has(location.hostname) && localStaticPorts.has(location.port)) {
+    return 'http://localhost:8000';
+  }
+  return '';
+}
+const API = resolveApiBase();
+
+// ── State ────────────────────────────────────────────────────────────────────
+let S = {
+  token:       localStorage.getItem('riq_tok'),
+  user:        JSON.parse(localStorage.getItem('riq_usr') || 'null'),
+  pendingEmail:'',
+  resumeId:    null,
+  analysisId:  null,
+  file:        null,
+};
+
+// ── Nav scroll effect ─────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav')?.classList.toggle('scrolled', scrollY > 40);
+});
+
+// ── Page routing ─────────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── Alerts ───────────────────────────────────────────────────────────────────
+function showAlert(id, msg, type = 'error') {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = msg;
+  el.className = `alert alert-${type} show`;
+}
+function hideAlert(id) { const el = document.getElementById(id); if (el) el.classList.remove('show'); }
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// ── API helper ────────────────────────────────────────────────────────────────
+async function api(method, path, body, isForm = false) {
+  const h = {};
+  if (S.token) h['Authorization'] = `Bearer ${S.token}`;
+  if (!isForm) h['Content-Type'] = 'application/json';
+  const opts = { method, headers: h };
+  if (body) opts.body = isForm ? body : JSON.stringify(body);
+  const res = await fetch(`${API}${path}`, opts);
+  if (res.status === 204) return null;
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.detail || JSON.stringify(data));
+  return data;
+}
+
+async function downloadPDF(path, filename) {
+  try {
+    if (!S.token) throw new Error('Please sign in again before downloading.');
+    const res = await fetch(path, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${S.token}` },
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => null);
+      throw new Error(`Download failed (${res.status})${text ? `: ${text}` : ''}`);
+    }
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    trackEvent('download');
+  } catch (e) {
+    showAlert('results-alert', e.message || 'Failed to download PDF.');
+  }
+}
+
+// ── Score helpers ─────────────────────────────────────────────────────────────
+function sCol(s) { return s>=80?'#12b96a':s>=60?'#f5a623':s>=40?'#f97316':'#f53e3e'; }
+function sLbl(s) { return s>=80?'Excellent':s>=60?'Good':s>=40?'Fair':'Needs Work'; }
+function scoreColorName(s) { return s>=75?'green':s>=45?'yellow':'red'; }
+
+async function trackEvent(eventType) {
+  if (!S.token) return;
+  try {
+    await fetch(`${API}/api/v1/admin/track-event?event_type=${encodeURIComponent(eventType)}`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${S.token}` },
+    });
+  } catch (e) {
+    console.warn('event tracking skipped:', e);
+  }
+}
+
+function addAdminLink() {
+  const email = (S.user?.email || '').toLowerCase();
+  const adminEmails = new Set(['admin@resumeiq.com', 'rhak19is@cmrit.ac.in']);
+  if (!adminEmails.has(email) || document.getElementById('admin-link-btn')) return;
+  const btn = document.createElement('button');
+  btn.id = 'admin-link-btn';
+  btn.className = 'btn-signout';
+  btn.textContent = 'Admin';
+  btn.onclick = () => window.open('/admin-dashboard.html', '_blank');
+  const signout = document.querySelector('.app-user .btn-signout');
+  document.querySelector('.app-user')?.insertBefore(btn, signout);
+}
+
+// ── Init app ─────────────────────────────────────────────────────────────────
+function initApp() {
+  if (!S.user) return;
+  showPage('page-app');
+  document.getElementById('app-username').textContent = S.user.full_name?.split(' ')[0] || 'User';
+  document.getElementById('app-avatar').textContent   = (S.user.full_name||'U').split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+  const h = new Date().getHours();
+  document.getElementById('dash-greeting').textContent = `${h<12?'Good morning':h<17?'Good afternoon':'Good evening'}, ${S.user.full_name?.split(' ')[0]||'there'} 👋`;
+  addAdminLink();
+  loadDashStats();
+}
+
+// ── Auth flows ────────────────────────────────────────────────────────────────
+async function doLogin() {
+  hideAlert('login-alert');
+  const email = document.getElementById('login-email').value.trim();
+  const pwd   = document.getElementById('login-password').value;
+  if (!email || !pwd) { showAlert('login-alert','Please fill in all fields.'); return; }
+  const btn = document.getElementById('login-btn');
+  btn.innerHTML = '<span class="spinner"></span> Signing in...'; btn.disabled = true;
+  try {
+    const d = await api('POST', '/api/v1/auth/login', { email, password: pwd });
+    S.token = d.access_token;
+    S.user  = { id: d.user_id, email: d.email, full_name: d.full_name };
+    localStorage.setItem('riq_tok', S.token);
+    localStorage.setItem('riq_usr', JSON.stringify(S.user));
+    initApp();
+  } catch(e) {
+    showAlert('login-alert', e.message);
+    btn.innerHTML = 'Sign In'; btn.disabled = false;
+  }
+}
+
+async function doRegister() {
+  hideAlert('register-alert');
+  const full_name = document.getElementById('reg-name').value.trim();
+  const email     = document.getElementById('reg-email').value.trim();
+  const password  = document.getElementById('reg-password').value;
+  if (!full_name||!email||!password) { showAlert('register-alert','Please fill in all fields.'); return; }
+  if (password.length < 8) { showAlert('register-alert','Password must be at least 8 characters.'); return; }
+  const btn = document.getElementById('register-btn');
+  btn.innerHTML = '<span class="spinner"></span> Creating account...'; btn.disabled = true;
+  try {
+    await api('POST', '/api/v1/auth/register', { full_name, email, password });
+    S.pendingEmail = email;
+    document.getElementById('otp-sub').textContent = `We sent a 6-digit code to ${email}`;
+    showPage('page-otp');
+    document.getElementById('o0').focus();
+  } catch(e) {
+    showAlert('register-alert', e.message);
+    btn.innerHTML = 'Create Account →'; btn.disabled = false;
+  }
+}
+
+function otpNext(i) {
+  const v = document.getElementById(`o${i}`).value.replace(/\D/g,'');
+  document.getElementById(`o${i}`).value = v;
+  if (v && i < 5) document.getElementById(`o${i+1}`).focus();
+  if (i === 5 && v) doVerifyOTP();
+}
+function otpBack(e, i) {
+  if (e.key === 'Backspace' && !document.getElementById(`o${i}`).value && i > 0)
+    document.getElementById(`o${i-1}`).focus();
+}
+function getOTP() { return [0,1,2,3,4,5].map(i=>document.getElementById(`o${i}`).value).join(''); }
+
+async function doVerifyOTP() {
+  hideAlert('otp-alert');
+  const otp = getOTP();
+  if (otp.length < 6) { showAlert('otp-alert','Please enter the full 6-digit code.'); return; }
+  const btn = document.getElementById('otp-btn');
+  btn.innerHTML = '<span class="spinner"></span> Verifying...'; btn.disabled = true;
+  try {
+    await api('POST', '/api/v1/auth/verify-otp', { email: S.pendingEmail, otp });
+    showAlert('otp-alert','✓ Email verified! Redirecting to login...','success');
+    setTimeout(() => { showPage('page-login'); document.getElementById('login-email').value = S.pendingEmail; }, 1600);
+  } catch(e) {
+    showAlert('otp-alert', e.message);
+    btn.innerHTML = 'Verify & Continue'; btn.disabled = false;
+  }
+}
+
+async function doResendOTP() {
+  try {
+    await api('POST', '/api/v1/auth/resend-otp', { email: S.pendingEmail });
+    showAlert('otp-alert','New OTP sent! Check your email or the Docker terminal logs.','success');
+  } catch(e) { showAlert('otp-alert', e.message); }
+}
+
+function logout() {
+  localStorage.removeItem('riq_tok'); localStorage.removeItem('riq_usr');
+  S.token = null; S.user = null;
+  showPage('page-landing');
+}
+
+// ── View switching ────────────────────────────────────────────────────────────
+function switchView(v) {
+  ['dashboard','analyze','templates','history'].forEach(id => {
+    document.getElementById(`view-${id}`).classList.toggle('active', id === v);
+    document.getElementById(`nav-${id}`)?.classList.toggle('active', id === v);
+  });
+  if (v === 'templates') loadTemplates();
+  if (v === 'history') loadHistory();
+  if (v === 'dashboard') loadDashStats();
+}
+
+// ── Dashboard ─────────────────────────────────────────────────────────────────
+async function loadDashStats() {
+  try {
+    const [resumes, hist] = await Promise.all([
+      api('GET','/api/v1/resumes/'),
+      api('GET','/api/v1/analysis/history'),
+    ]);
+    document.getElementById('s-resumes').textContent  = resumes.length;
+    document.getElementById('s-analyses').textContent = hist.length;
+    if (hist.length) {
+      document.getElementById('s-best').textContent = Math.max(...hist.map(h=>h.ats_score||0));
+    }
+    const rc = document.getElementById('dash-recent');
+    if (!hist.length) {
+      rc.innerHTML = `<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No analyses yet</div><div class="empty-sub">Upload a resume to get started</div><button class="btn-primary" onclick="switchView('analyze')">Start Now →</button></div>`;
+    } else {
+      rc.innerHTML = hist.slice(0,3).map(h => histRow(h)).join('');
+    }
+  } catch(e) { console.error('dash stats:', e); }
+}
+
+// ── File upload ───────────────────────────────────────────────────────────────
+async function loadTemplates() {
+  const grid = document.getElementById('templates-grid');
+  hideAlert('templates-alert');
+  grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:26px;color:var(--muted)"><span class="spinner spinner-dark"></span><div style="margin-top:10px">Loading templates...</div></div>`;
+  try {
+    const data = await api('GET', '/api/v1/templates/list');
+    const templates = data.templates || [];
+    if (!templates.length) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-title">No templates found</div><div class="empty-sub">The backend responded, but the library is empty.</div></div>`;
+      return;
+    }
+    grid.innerHTML = templates.map(t => `
+      <div class="template-card">
+        <div class="template-head">
+          <div>
+            <div class="template-title">${escapeHtml(t.name)}</div>
+            <div class="template-desc">${escapeHtml(t.description || '')}</div>
+          </div>
+          <div class="template-score">${Number(t.ats_score || 0)}</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
+          <span class="chip chip-g">ATS ${Number(t.ats_score || 0)}/100</span>
+          <span class="chip chip-gray">${escapeHtml(t.difficulty || 'Standard')}</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px">
+          ${(t.pros || []).slice(0, 2).map(p => `+ ${escapeHtml(p)}`).join('<br>')}
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn-secondary" style="font-size:13px;padding:8px 14px" onclick="viewTemplateDetail('${escapeHtml(t.id)}')">View</button>
+          <button class="btn-primary" style="font-size:13px;padding:8px 14px" onclick="downloadTemplateFile('${escapeHtml(t.id)}')">Download TXT</button>
+        </div>
+      </div>
+    `).join('');
+  } catch (e) {
+    grid.innerHTML = '';
+    showAlert('templates-alert', e.message || 'Could not load templates.');
+  }
+}
+
+async function viewTemplateDetail(templateId) {
+  const grid = document.getElementById('templates-grid');
+  hideAlert('templates-alert');
+  try {
+    const t = await api('GET', `/api/v1/templates/${encodeURIComponent(templateId)}`);
+    const existing = document.getElementById(`template-detail-${templateId}`);
+    if (existing) { existing.remove(); return; }
+    const box = document.createElement('div');
+    box.id = `template-detail-${templateId}`;
+    box.className = 'template-card';
+    box.style.gridColumn = '1 / -1';
+    box.innerHTML = `
+      <div class="template-head">
+        <div>
+          <div class="template-title">${escapeHtml(t.name)}</div>
+          <div class="template-desc">Example template text</div>
+        </div>
+        <button class="btn-secondary" style="font-size:13px;padding:8px 14px" onclick="this.closest('.template-card').remove()">Close</button>
+      </div>
+      <pre class="detail-pre">${escapeHtml(t.example || '')}</pre>
+    `;
+    grid.appendChild(box);
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    trackEvent('template_view');
+  } catch (e) {
+    showAlert('templates-alert', e.message || 'Could not open template.');
+  }
+}
+
+async function downloadTemplateFile(templateId) {
+  hideAlert('templates-alert');
+  try {
+    const d = await api('POST', `/api/v1/templates/download-example/${encodeURIComponent(templateId)}`);
+    const blob = new Blob([d.content || ''], { type: d.format || 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${(d.name || templateId).replace(/[^a-z0-9]+/gi, '_').toLowerCase()}_template.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    trackEvent('template_download');
+  } catch (e) {
+    showAlert('templates-alert', e.message || 'Could not download template.');
+  }
+}
+
+function dov(e){e.preventDefault();document.getElementById('upload-zone').classList.add('dragover')}
+function dol(e){document.getElementById('upload-zone').classList.remove('dragover')}
+function dof(e){e.preventDefault();dol(e);const f=e.dataTransfer.files[0];if(f)setFile(f)}
+function onFile(e){const f=e.target.files[0];if(f)setFile(f)}
+function setFile(f) {
+  S.file = f;
+  document.getElementById('upload-zone').classList.add('uploaded');
+  document.getElementById('upload-label').textContent = f.name;
+  document.getElementById('file-bar-text').textContent = `${f.name} · ${(f.size/1024).toFixed(1)} KB`;
+  document.getElementById('file-bar').style.display = 'flex';
+  document.getElementById('upload-btn').disabled = false;
+}
+function clearFile() {
+  S.file = null;
+  document.getElementById('upload-zone').className = 'upload-zone';
+  document.getElementById('upload-label').textContent = 'Drop your resume here or click to browse';
+  document.getElementById('file-bar').style.display = 'none';
+  document.getElementById('file-input').value = '';
+  document.getElementById('upload-btn').disabled = true;
+}
+
+async function doUpload() {
+  hideAlert('upload-alert');
+  if (!S.file) return;
+  const btn = document.getElementById('upload-btn');
+  btn.innerHTML = '<span class="spinner"></span> Uploading...'; btn.disabled = true;
+  try {
+    const fd = new FormData(); fd.append('file', S.file);
+    const d = await api('POST','/api/v1/resumes/upload', fd, true);
+    S.resumeId = d.id;
+    document.getElementById('upload-ok').style.display = 'inline';
+    showAlert('upload-alert', `✓ Uploaded! Detected ${(d.detected_skills||[]).length} skills. Now fill in the job description below.`, 'success');
+    document.getElementById('card-jd').style.opacity = '1';
+    document.getElementById('card-jd').style.pointerEvents = 'auto';
+    trackEvent('upload');
+    btn.innerHTML = '✓ Uploaded';
+  } catch(e) {
+    showAlert('upload-alert', e.message);
+    btn.innerHTML = 'Upload Resume →'; btn.disabled = false;
+  }
+}
+
+// ── Analysis ──────────────────────────────────────────────────────────────────
+async function doAnalyze() {
+  hideAlert('jd-alert');
+  const jd = document.getElementById('jd-text').value.trim();
+  const jt = document.getElementById('jd-title').value.trim();
+  if (!S.resumeId) { showAlert('jd-alert','Please upload a resume first.'); return; }
+  if (jd.length < 50) { showAlert('jd-alert','Job description is too short (min 50 characters).'); return; }
+  const btn = document.getElementById('analyze-btn');
+  btn.innerHTML = '<span class="spinner"></span> Analysing...'; btn.disabled = true;
+  try {
+    const d = await api('POST','/api/v1/analysis/run',{resume_id:S.resumeId,jd_text:jd,jd_title:jt||null});
+    S.analysisId = d.analysis_id;
+    renderResults(d);
+    document.getElementById('results-wrap').style.display = 'block';
+    document.getElementById('results-wrap').scrollIntoView({behavior:'smooth'});
+    trackEvent('analyze');
+    btn.innerHTML = '✓ Done';
+  } catch(e) {
+    showAlert('jd-alert', e.message);
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Run ATS Analysis';
+    btn.disabled = false;
+  }
+}
+
+function setExtraSection(id, title, bodyHtml) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (!bodyHtml) {
+    el.style.display = 'none';
+    el.innerHTML = '';
+    return;
+  }
+  el.style.display = 'block';
+  el.innerHTML = `<div class="section-card-hdr" style="padding:0;margin-bottom:12px"><span class="section-card-title">${title}</span></div>${bodyHtml}`;
+}
+
+function renderCategoryScores(scores) {
+  if (!Array.isArray(scores) || !scores.length) return setExtraSection('category-section', '', '');
+  const html = `<div class="category-grid">${scores.slice(0, 8).map(c => {
+    const score = Number(c.score || 0);
+    const color = c.color || scoreColorName(score);
+    return `<div class="category-card" style="border-left-color:${color === 'green' ? '#12b96a' : color === 'yellow' ? '#f5a623' : '#f53e3e'}">
+      <div class="category-card-name">${escapeHtml(c.category || 'Category')}</div>
+      <div class="category-card-score" style="color:${sCol(score)}">${score}%</div>
+    </div>`;
+  }).join('')}</div>`;
+  setExtraSection('category-section', 'Category Scores', html);
+}
+
+function renderRecommendations(recs) {
+  if (!Array.isArray(recs) || !recs.length) return setExtraSection('recommendations-section', '', '');
+  const html = recs.slice(0, 6).map(r => {
+    const high = r.priority === 'high';
+    const border = r.border_color || (high ? '#f53e3e' : '#f5a623');
+    return `<div class="rec-card" style="border-left-color:${escapeHtml(border)}">
+      <span class="chip ${high ? 'chip-r' : 'chip-y'}" style="margin-right:8px">${escapeHtml(r.priority || 'medium')}</span>
+      ${escapeHtml(r.text || '')}
+    </div>`;
+  }).join('');
+  setExtraSection('recommendations-section', 'Recommendations', html);
+}
+
+function renderRoleSuggestions(roles) {
+  if (!Array.isArray(roles) || !roles.length) return setExtraSection('roles-section', '', '');
+  const html = `<div class="role-grid">${roles.slice(0, 6).map(role => `
+    <div class="role-card">
+      <div class="role-name">${escapeHtml(role.title || role.role || role.name || role)}</div>
+      <div class="role-meta">${escapeHtml(role.match_reason || role.industry || role.reason || 'Suggested from your analysis')}</div>
+    </div>`).join('')}</div>`;
+  setExtraSection('roles-section', 'Suitable Roles', html);
+}
+
+function renderDetailedAnalysis(text) {
+  if (!text) return setExtraSection('detailed-section', '', '');
+  setExtraSection('detailed-section', 'Detailed Analysis', `<pre class="detail-pre">${escapeHtml(text)}</pre>`);
+}
+
+function renderResults(d) {
+  const score = d.ats_score ?? d.overall_score ?? 0, col = sCol(score);
+  // Ring
+  const circ = 2*Math.PI*58, off = circ-(score/100)*circ;
+  const c = document.getElementById('score-circle');
+  c.setAttribute('stroke', col);
+  c.setAttribute('stroke-dashoffset', off);
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('score-display').style.color = col;
+  document.getElementById('score-label-txt').textContent = sLbl(score);
+  document.getElementById('score-label-txt').style.color = col;
+  // Bars
+  const kw = d.keyword_score ?? Math.min(100, Math.round(((d.matched_skills || d.matched_keywords || []).length / Math.max(((d.matched_skills || d.matched_keywords || []).length + (d.missing_skills || d.missing_keywords || []).length), 1)) * 100));
+  const sem = Math.round(d.semantic_score ?? score);
+  document.getElementById('kw-pct').textContent = kw+'%'; document.getElementById('kw-pct').style.color = sCol(kw);
+  document.getElementById('kw-bar').style.width  = kw+'%'; document.getElementById('kw-bar').style.background = sCol(kw);
+  document.getElementById('sem-pct').textContent = sem+'%'; document.getElementById('sem-pct').style.color = sCol(sem);
+  document.getElementById('sem-bar').style.width  = Math.min(100,sem)+'%';
+  // Verdict
+  const vb = document.getElementById('verdict'); vb.style.display = 'block';
+  const vs = score>=80?{bg:'#d1fae5',bc:'#6ee7b7',c:'#065f46',t:'🎉 Strong match! Your resume aligns well with this role.'}
+           : score>=60?{bg:'#fef9c3',bc:'#fde047',c:'#854d0e',t:'👍 Good match. A few improvements will boost your chances.'}
+           : score>=40?{bg:'#fff7ed',bc:'#fed7aa',c:'#9a3412',t:'⚠️ Moderate match. Optimization recommended before applying.'}
+           :            {bg:'#fee2e2',bc:'#fca5a5',c:'#991b1b',t:'🚨 Low match. Use AI optimization to improve alignment.'};
+  vb.style.background=vs.bg; vb.style.border=`1px solid ${vs.bc}`; vb.style.color=vs.c; vb.textContent=vs.t;
+  // Skills
+  const matched = d.matched_skills || d.matched_keywords || [];
+  const partial = d.partial_keywords || [];
+  const missing = d.missing_skills || d.missing_keywords || [];
+  document.getElementById('mc').textContent=matched.length;
+  document.getElementById('xc').textContent=missing.length;
+  document.getElementById('matched-list').innerHTML=[
+    matched.map(s=>`<span class="chip chip-g">${escapeHtml(s)}</span>`).join('')||'<span style="font-size:13px;color:var(--muted)">None detected.</span>',
+    partial.length ? `<div style="font-size:13px;font-weight:600;color:var(--ink2);margin:14px 0 8px">Partial (${partial.length})</div>${partial.map(s=>`<span class="chip chip-y">${escapeHtml(s)}</span>`).join('')}` : ''
+  ].join('');
+  document.getElementById('missing-list').innerHTML=missing.map(s=>`<span class="chip chip-r">${escapeHtml(s)}</span>`).join('')||'<span style="font-size:13px;color:#065f46">All present!</span>';
+  // Insights
+  if (d.ai_insights) {
+    document.getElementById('insights-body').innerHTML = d.ai_insights.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  }
+  renderCategoryScores(d.category_scores);
+  renderRecommendations(d.recommendations);
+  renderRoleSuggestions(d.suitable_roles);
+  renderDetailedAnalysis(d.detailed_analysis);
+}
+
+// ── Optimize ──────────────────────────────────────────────────────────────────
+async function doOptimize() {
+  if (!S.analysisId) return;
+  const btn = document.getElementById('opt-btn');
+  btn.innerHTML = '<span class="spinner"></span> Optimizing...'; btn.disabled = true;
+  rTab('optimized', document.getElementById('opt-tab-btn'));
+  document.getElementById('opt-content').innerHTML = `<div style="text-align:center;padding:40px;color:var(--muted)"><span class="spinner spinner-dark" style="width:28px;height:28px;border-width:3px"></span><div style="margin-top:14px;font-weight:500">Gemini AI is rewriting your resume...</div><div style="font-size:12px;margin-top:6px">This takes 15–30 seconds</div></div>`;
+  try {
+    const d = await api('POST','/api/v1/analysis/optimize',{analysis_id:S.analysisId});
+    const imp = d.score_improvement>=0?`+${d.score_improvement}`:`${d.score_improvement}`;
+    document.getElementById('opt-content').innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+        <div style="display:flex;gap:8px">
+          <span class="chip chip-g" style="font-size:13px">New ATS: ${d.new_ats_score}</span>
+          <span class="chip ${d.score_improvement>=0?'chip-g':'chip-gray'}" style="font-size:13px">Change: ${imp}pts</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn-secondary" style="font-size:13px;padding:8px 14px" onclick="navigator.clipboard?.writeText(document.getElementById('opt-text').textContent)">Copy</button>
+          ${d.pdf_available?`<button type="button" class="btn-primary" style="font-size:13px;padding:8px 14px" onclick="downloadPDF('${API}${d.pdf_url}','optimized_resume_${S.analysisId.slice(0,8)}.pdf')">⬇ Download PDF</button>`:''}
+        </div>
+      </div>
+      <pre id="opt-text" class="opt-pre">${escapeHtml(d.optimized_resume || '')}</pre>
+      <div style="margin-top:10px;font-size:12px;color:var(--muted)">💡 Review before submitting. Only include skills you genuinely have.</div>`;
+    document.getElementById('opt-tab-btn').textContent = '✨ Optimized';
+    btn.innerHTML = '✓ Done';
+  } catch(e) {
+    document.getElementById('opt-content').innerHTML = `<div class="alert alert-error show">${e.message}</div>`;
+    btn.innerHTML = 'Optimize with AI'; btn.disabled = false;
+    hideAlert('results-alert');
+  }
+}
+
+function rTab(id, el) {
+  ['score','skills','insights','optimized'].forEach(t=>{
+    document.getElementById(`rtab-${t}`).style.display = t===id?'block':'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  if(el) el.classList.add('active');
+}
+
+function resetAnalyze() {
+  clearFile();
+  S.resumeId = null; S.analysisId = null;
+  document.getElementById('jd-text').value = '';
+  document.getElementById('jd-title').value = '';
+  document.getElementById('upload-ok').style.display = 'none';
+  document.getElementById('card-jd').style.opacity = '0.45';
+  document.getElementById('card-jd').style.pointerEvents = 'none';
+  document.getElementById('results-wrap').style.display = 'none';
+  document.getElementById('upload-btn').innerHTML = 'Upload Resume →';
+  document.getElementById('analyze-btn').innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Run ATS Analysis';
+  document.getElementById('analyze-btn').disabled = false;
+  document.getElementById('opt-btn').innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Optimize with AI';
+  document.getElementById('opt-btn').disabled = false;
+  document.getElementById('opt-tab-btn').textContent = 'Optimized';
+}
+
+// ── History ───────────────────────────────────────────────────────────────────
+function histRow(h) {
+  const col = sCol(h.ats_score||0);
+  const dt = h.created_at ? new Date(h.created_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+  return `<div class="hist-row">
+    <div class="hist-badge" style="background:${col}18;color:${col}">${h.ats_score||'—'}</div>
+    <div class="hist-info">
+      <div class="hist-title">${h.jd_title||'Analysis'}</div>
+      <div class="hist-meta">${sLbl(h.ats_score||0)} · ${h.matched_count} matched · ${h.missing_count} missing · ${dt}</div>
+    </div>
+    ${h.has_pdf?`<button type="button" class="btn-secondary" style="font-size:12px;padding:6px 12px;flex-shrink:0" onclick="downloadPDF('${API}/api/v1/analysis/${h.id}/download-pdf','optimized_resume_${h.id.slice(0,8)}.pdf')">⬇ PDF</button>`:''}
+  </div>`;
+}
+
+async function loadHistory() {
+  try {
+    const data = await api('GET','/api/v1/analysis/history');
+    const el = document.getElementById('hist-list');
+    if (!data.length) {
+      el.innerHTML = `<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No analyses yet</div><div class="empty-sub">Run your first analysis to see results here</div><button class="btn-primary" onclick="switchView('analyze')">Start Analysis →</button></div>`;
+    } else {
+      el.innerHTML = data.map(h=>histRow(h)).join('');
+    }
+  } catch(e) { console.error('history:', e); }
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+if (S.token && S.user) initApp();
+</script>
+</body>
+</html>
